@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'minitest/test_task'
+require_relative 'lib/version'
 
 # Minitest::TestTask.create # named test, sensible defaults
 
@@ -14,3 +15,7 @@ Minitest::TestTask.create(:test) do |t|
 end
 
 task default: :test
+
+task :version do
+  p "v#{RpcServer::VERSION}"
+end
