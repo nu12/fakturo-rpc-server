@@ -1,8 +1,8 @@
-FROM ruby:3.2.8-slim as base
+FROM ruby:3.2.8-slim AS base
 
 WORKDIR /app
 
-FROM base as build
+FROM base AS build
 
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential git libyaml-dev pkg-config && \
