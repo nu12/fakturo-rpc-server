@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
+
 require 'bunny'
 require 'json'
 
@@ -50,15 +52,16 @@ class RegexMatcherServer
 
   def regex_matcher(text)
     result = []
-    lines = text.gsub(/ +/, " ").gsub("\r\n", "\n").split("\n")
+    lines = text.gsub(/ +/, ' ').gsub("\r\n", "\n").split("\n")
     matcher_a = MatcherA.new
     matcher_b = MatcherB.new
     lines.each do |line|
       matched = matcher_a.match(line) || matcher_b.match(line)
       next unless matched
+
       result << matched
     end
-    return result
+    result
   end
 end
 
@@ -68,6 +71,6 @@ begin
   puts 'Server starting, waiting RPC requests...'
   server.start('rpc_queue')
   server.loop_forever
-rescue Interrupt => _
+rescue Interrupt => _e
   server.stop
 end

@@ -1,8 +1,10 @@
-source "https://rubygems.org"
+# frozen_string_literal: true
 
-gem "bunny", "~> 2.24"
+source 'https://rubygems.org'
+
+gem 'bunny', '~> 2.24'
 
 group :development do
-  gem "minitest", "< 6"
+  gem 'minitest', '< 6'
   gem 'rubocop', require: false
 end

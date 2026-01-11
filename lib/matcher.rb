@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Matcher
-  def match text
-    raise Exception.new "Not implemented"
+  def match(_text)
+    raise StandardError, 'Not implemented'
   end
 end
