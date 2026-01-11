@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  workflow_dispatch: {}
+  pull_request:
+    branches:
+    - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2.8
+          bundler-cache: true
+
+      - name: Run tests
+        run: rake test
+
+  build:
+    runs-on: ubuntu-latest
+    needs: [test]
+    steps:
+      - name: Build
+        uses: nu12/templates/actions/build/docker@main
+        with:
+          tag: 'latest'
+          registry-password: '${{ secrets.TOKEN }}'
+          push: false
+          platforms: 'linux/amd64'
