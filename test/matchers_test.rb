@@ -20,7 +20,7 @@ class TestMatchers < Minitest::Test
       " ao\xC3\xBB 29 sep 02 ABC 18,95"
     ]
     no_matches = [
-      " Total 11 921,35 23 1 635,51"
+      " Total 11 121,35 23 1 335,51"
     ]
     matches.each { |m| refute_nil matcher.match m }
     no_matches.each { |nm| assert_nil matcher.match nm }
