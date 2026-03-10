@@ -27,7 +27,7 @@ jobs:
     needs: [test]
     steps:
       - name: Build
-        uses: nu12/templates/actions/build/docker@main
+        uses: nu12/templates/actions/build/docker/v1@main
         with:
           tag: 'latest'
           registry-password: '${{ secrets.TOKEN }}'

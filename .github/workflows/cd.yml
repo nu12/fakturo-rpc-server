@@ -13,11 +13,11 @@ jobs:
     steps:
     - uses: actions/checkout@v6
     - name: Release
-      uses: nu12/templates/actions/github/release@main
+      uses: nu12/templates/actions/github/release/v1@main
       with:
         version: '${{ github.ref_name }}'
     - name: Build
-      uses: nu12/templates/actions/build/docker@main
+      uses: nu12/templates/actions/build/docker/v1@main
       with:
         tag: '${{ github.ref_name }}'
         registry-password: '${{ secrets.TOKEN }}'
