@@ -24,11 +24,22 @@ class MatcherB < Matcher
 
   def match(text)
     m = @re.match(text.force_encoding(Encoding::ISO_8859_1))
-    if m && m[:day] && m[:month] && m[:description] && m[:value]
+    if is_valid? m
       return { date: "#{Date.today.year}-#{@month_matrix[m[:month].force_encoding(Encoding::UTF_8)]}-#{m[:day]}",
                description: m[:description], value: m[:value].gsub(',', '.').to_f }
     end
-
+    
     nil
+  end
+
+  private
+  def is_valid?(match)
+    return false unless match
+    return false unless match[:day]
+    return false unless match[:month]
+    return false unless @month_matrix[match[:month].force_encoding(Encoding::UTF_8)]
+    return false unless match[:description]
+    return false unless match[:value]
+    true
   end
 end
