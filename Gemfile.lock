@@ -1,23 +1,23 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    amq-protocol (2.5.0)
-    bunny (2.24.0)
-      amq-protocol (~> 2.3)
+    amq-protocol (2.7.0)
+    bunny (3.1.0)
+      amq-protocol (~> 2.7)
+      logger (~> 1, >= 1.7)
       sorted_set (~> 1, >= 1.0.2)
+    logger (1.7.0)
     minitest (5.27.0)
     rbtree (0.4.6)
-    set (1.1.2)
-    sorted_set (1.0.3)
+    sorted_set (1.1.0)
       rbtree
-      set (~> 1.0)
 
 PLATFORMS
   arm64-darwin-24
   ruby
 
 DEPENDENCIES
-  bunny (~> 2.24)
+  bunny (~> 3.1)
   minitest (< 6)
 
 BUNDLED WITH

@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-gem 'bunny', '~> 2.24'
+gem 'bunny', '~> 3.1'
 
 group :development do
   gem 'minitest', '< 6'
