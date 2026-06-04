@@ -24,6 +24,10 @@ class MatcherB < Matcher
 
   def match(text)
     m = @re.match(text.force_encoding(Encoding::ISO_8859_1))
+    
+    p text if ENV.fetch('PRINT_LINE', 'false').downcase == "true"
+    p m if ENV.fetch('PRINT_MATCH', 'false').downcase == "true"
+    
     if is_valid? m
       return { date: "#{Date.today.year}-#{@month_matrix[m[:month].force_encoding(Encoding::UTF_8)]}-#{m[:day]}",
                description: m[:description], value: m[:value].gsub(',', '.').to_f }
