@@ -9,6 +9,10 @@ class MatcherA < Matcher
 
   def match(text)
     m = @re.match(text)
+
+    p text if ENV.fetch('PRINT_LINE', 'false').downcase == "true"
+    p m if ENV.fetch('PRINT_MATCH', 'false').downcase == "true"
+    
     if m && m[:day] && m[:month] && m[:description] && m[:value]
       return { date: "#{Date.today.year}-#{m[:month]}-#{m[:day]}", description: m[:description],
                value: m[:value].to_f }
