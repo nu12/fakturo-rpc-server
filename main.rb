@@ -55,8 +55,9 @@ class RegexMatcherServer
     lines = text.gsub(/ +/, ' ').gsub("\r\n", "\n").split("\n")
     matcher_a = MatcherA.new
     matcher_b = MatcherB.new
+    matcher_c = MatcherC.new
     lines.each do |line|
-      matched = matcher_a.match(line) || matcher_b.match(line)
+      matched = matcher_a.match(line) || matcher_b.match(line) || matcher_c.match(line)
       next unless matched
 
       result << matched
