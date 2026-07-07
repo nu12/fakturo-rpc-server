@@ -7,6 +7,7 @@ require 'json'
 require_relative 'lib/matcher'
 require_relative 'lib/matcher_a'
 require_relative 'lib/matcher_b'
+require_relative 'lib/matcher_c'
 
 class RegexMatcherServer
   def initialize
