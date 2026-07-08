@@ -5,7 +5,8 @@ require_relative 'matcher'
 
 class MatcherC < Matcher
   def initialize
-    @re = /^\s*(?<month>\S{3,})\s(?<day>\d{1,2})\s(?<description>.*)\w{3}.*\s(?<value>\d+.\d{2})\s\d+.\d+/
+    @continue_processing = true
+    @re = /^\s*(?<month>\S{3,})\s(?<day>\d{1,2})\s(?<description>.*)\w{3}.*\D\s(.*)(\d.|\D)\s(?<value>\d+(?:\s\d+)*.\d{2})\s(\d+(?:\s\d+)*.\d{2})$/
     @month_matrix = {
       'JAN' => '01',
       'FEB' => '02',
@@ -23,14 +24,15 @@ class MatcherC < Matcher
   end
 
   def match(text)
+    @continue_processing = false if text == " SAVINGS AND INVESTMENT ACCOUNT"
     m = @re.match(text.force_encoding(Encoding::ISO_8859_1))
     
     p text if ENV.fetch('PRINT_LINE', 'false').downcase == "true"
     p m if ENV.fetch('PRINT_MATCH', 'false').downcase == "true"
     
-    if is_valid? m
+    if is_valid? m and @continue_processing
       return { date: "#{Date.today.year}-#{@month_matrix[m[:month]]}-#{m[:day]}",
-               description: m[:description], value: m[:value].gsub(',', '.').to_f }
+               description: m[:description].force_encoding(Encoding::UTF_8), value: m[:value].gsub(',', '.').gsub(' ', '').to_f }
     end
     
     nil
